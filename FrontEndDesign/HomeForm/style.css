@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Hurricane&family=Parisienne&family=Tangerine:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Dancing+Script:wght@700&family=Hurricane&family=Parisienne&family=Tangerine:wght@700&display=swap");
+:root {
+  --brown: rgb(54, 31, 31);
+  --green: #7fd8a4;
+  --black: #192a56;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+* {
+  font-family: "Noto Serif Display", serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+}
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 5.5rem;
+  scroll-behavior: smooth;
+}
+section {
+  margin-top: 7.5rem;
+  padding: 2 rem 9%;
+}
+section:nth-child(even) {
+  background: #fff;
+}
+.sub-heading {
+  text-align: center;
+  color: var(--green);
+  font-size: 2rem;
+  padding-top: 1rem;
+}
+.home .home-slider .slide {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-top: 9rem;
+}
+
+.home .home-slider .slide .content {
+  flex: 1 1 45rem;
+}
+
+.home .home-slider .slide .image {
+  flex: 1 1 45rem;
+}
+
+.home .home-slider .slide .image img {
+  width: 100%;
+}
+
+.home .home-slider .slide .content span {
+  color: var(--black);
+  font-size: 2.5rem;
+  font-family: "Dancing Script", cursive;
+}
+
+.home .home-slider .slide .content h3 {
+  color: rgb(161, 21, 21);
+  font-size: 8rem;
+  text-align: center;
+  font-family: "Dancing Script", cursive;
+}
+
+.home .home-slider .slide .content p {
+  color: var(--light-color);
+  font-size: 2.2rem;
+  padding: 0.5rem 0;
+  line-height: 1.5;
+  font-family: "Cookie", cursive;
+  text-align: center;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--green);
+}
+@media (max-width: 768px) {
+  .home .home-slider .slide .content h3 {
+    font-size: 5rem;
+  }
+}

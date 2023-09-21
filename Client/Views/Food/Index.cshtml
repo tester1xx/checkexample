@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Food>
+@{
+    ViewData["Title"] = "Quán lý món ăn";
+    ViewData["HomeActive"] = "";
+    ViewData["MenuActive"] = "";
+    ViewData["FoodActive"] = "active";
+    ViewData["RequestActive"] = "";
+}
+@section MYCSS{
+<link href="@Url.Content("~/css/food.css")" rel="stylesheet" />
+}
+<section class="manage-container">
+    <div class="table-Container">
+        <div style="display:inline;">
+            <p class="title">Quản Lý Món Ăn</p>
+            <a asp-action="Upsert" class="upsert">
+                <i class="fas fa-plus"></i> &nbsp;
+                Tạo món mới
+            </a>
+        </div>
+        <div class="table-box">
+            <table id="food-table">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Giá</th>
+                        <th>Mô tả</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (Food f in Model)
+                    {
+                        <tr>
+                            <td>@f.Name</td>
+                            <td>@f.Price</td>
+                            <td>@f.Description</td>
+                            <td>
+                                <span class="action_btn">
+                                    <a asp-action="Upsert" asp-route-id="@f.Id" class="fas fa-edit"></a>
+                                    <a onclick="Delete('/food/delete/@f.Id')" class="fas fa-trash-alt"></a>
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+<script src="~/lib/dataTable/jquery.dataTables.min.js"></script>
+<script src="~/lib/sweet-alert/sweetalert.min.js"></script>
+<script src="~/js/food.js"></script>
+}

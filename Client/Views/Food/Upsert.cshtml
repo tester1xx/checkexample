@@ -1,0 +1,79 @@
+﻿@model Food
+@{
+    ViewData["Title"] = "Sửa món ăn";
+    var title = "Tạo món ăn";
+}
+@section MYCSS{
+<link href="@Url.Content("~/css/upsert.css")" rel="stylesheet" />
+}
+
+<form method="post" enctype="multipart/form-data">
+    <section class="create-food-container">
+        @if (Model.Id != 0)
+        {
+            title = "Sửa món ăn";
+        }
+        <h3 class="title">@title</h3>
+        <div class="table-Container">
+            <div class="box-container">
+                <div asp-validation-summary="ModelOnly" style="color:red"></div>
+                @if (Model.Id != 0)
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
+                <div class="form_row">
+                    <label asp-for="Name" class="form_label"></label>
+                    <input asp-for="Name" class="form_input" />
+                    <span asp-validation-for="Name" style="color:red"></span>
+                </div>
+                <div class="form_row">
+                    <label asp-for="Price" class="form_label"></label>
+                    <input asp-for="Price" class="form_input" />
+                    <span asp-validation-for="Price" style="color:red"></span>
+                </div>
+                <div class="form_row">
+                    <label asp-for="Description" class="form_label"></label>
+                    <textarea asp-for="Description" class="form_area" rows="3"></textarea>
+                    <span asp-validation-for="Description" style="color:red"></span>
+                </div>
+                <div class="form_row">
+                    <label asp-for="Image" class="form_label"></label>
+                    <input type="file" asp-for="Image" id="projectImage" name="files" multiple class="form_input" />
+                </div>
+                <div class="action-create">
+                    @if (Model.Id != 0)
+                    {
+                        <button type="submit" class="btn">Cập nhật</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn">Tạo mới</button>
+                    }
+                    <a asp-action="Index" class="btn">Quay lại</a>
+                </div>
+
+            </div>
+            <div class="picture-container">
+                @if (Model.Image != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.Image);
+                    string imgsrc = "";
+                    if (string.IsNullOrEmpty(base64))
+                    {
+                        imgsrc = "~/img/150.png";
+                    }
+                    else
+                    {
+                        imgsrc = $"data:image/jpg;base64,{base64}";
+                    }
+                    <img src="@imgsrc" alt="MyIMG">
+                }
+            </div>
+
+        </div>
+    </section>
+</form>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

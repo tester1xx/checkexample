@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpAcc
+@{
+    string IsLoggedInStr = httpAcc.HttpContext.Session.GetString("IsLoggedIn");
+    bool IsLoggedIn = Convert.ToBoolean(IsLoggedInStr);
+    string DisplayName = httpAcc.HttpContext.Session.GetString("DisplayName");
+}
+
+<header>
+    <a asp-controller="Home" asp-action="Index" class="logo">Luxury Restaurant</a>
+    <nav class="navbar">
+        <a class=@ViewData["HomeActive"] asp-controller="Home" asp-action="Index">Trang chủ</a>
+        <a class=@ViewData["MenuActive"] asp-controller="Menu" asp-action="Index">Menu</a>
+        @if (IsLoggedIn && (User.IsInRole(Constant.Role_Admin)))
+        {
+            <a class=@ViewData["FoodActive"] asp-controller="Food" asp-action="Index">Quản lý</a>
+        }
+        @if (IsLoggedIn && (User.IsInRole(Constant.Role_Customer)))
+        {
+            <a class=@ViewData["RequestActive"] asp-controller="Request" asp-action="Index">Yêu cầu</a>
+        }
+    </nav>
+
+
+    @if (IsLoggedIn)
+    {
+        <div class="icons">
+            <a style="font-size:20px">@DisplayName</a>
+            <a asp-controller="Cart" asp-action="Index" class="fas fa-shopping-cart"></a>
+            <a asp-controller="Home" asp-action="Logout" class="fas fa-sign-out-alt"></a>
+        </div>
+    }
+    else
+    {
+        <div class="icons">
+            <a asp-controller="Cart" asp-action="Index" class="fas fa-shopping-cart"></a>
+            <a asp-controller="Home" asp-action="Login" class="fas fa-user"> </a>
+        </div>
+    }
+</header>
